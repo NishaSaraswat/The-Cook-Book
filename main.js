@@ -75,7 +75,7 @@ document.getElementById("choice").onchange = function () {
     dietValue = this.value;
     fetchData2();
 };
-
+//Second fetch
 async function fetchData2() {
     try {
 
@@ -88,15 +88,15 @@ async function fetchData2() {
         for (let option of data.hits) {
 
             htmlContent += `<section class="result"> 
-                            <h3>${option.recipe.label}</h3>
+                            <h3 style="color:purple";>${option.recipe.label}</h3>
                             <img src=${option.recipe.image}>
                             <br><br>
                             <a href="${option.recipe.url}" 
                             target="_blank" id="full-Recipe">Full Recipe</a>
                             <br><br>
-                            <h4>${option.recipe.dietLabels}<h4>
-                            <a href="##"><h4>Ingredeants:</h4></a>
-                        <ul class="ingredient">
+                            <h4 style="color:brown";>${option.recipe.dietLabels}<h4>
+                            <a href="##"><h4 style="color:darkorange";>Ingredeants:</h4></a>
+                        <ul class="ingredient" style="color:olivedrab";>
                         ${option.recipe.ingredientLines.join('.<br>')}
                         </ul>
                             </section><br>`;
@@ -114,12 +114,12 @@ let multiCkeck = document.getElementById("submit");
 multiCkeck.addEventListener("click", fetchData3);
 
 let chekedValue = " ";
-
+//Third fetch
 async function fetchData3() {
 
     try {
 
-        let checkBoxes = document.getElementsByName("excluded");
+        let checkBoxes = document.getElementsByName("health");
         for (let checkBox of checkBoxes) {
 
             if (checkBox.checked) {
@@ -129,23 +129,23 @@ async function fetchData3() {
             }
         }
 
-        let response = await fetch(`https://api.edamam.com/search?app_id=${APPI_ID}&app_key=${APPI_KEY}&q=${input.value}&excluded=${chekedValue}`);
+        let response = await fetch(`https://api.edamam.com/search?app_id=${APPI_ID}&app_key=${APPI_KEY}&q=${input.value}&health=${chekedValue}`);
         let data = await response.json();
         console.log(data);
 
         for (let option of data.hits) {
 
             htmlContent += `<section class="result"> 
-                            <h3>${option.recipe.label}</h3>
+                            <h3 style="color:purple";>${option.recipe.label}</h3>
                             <img src=${option.recipe.image}>
                             <br><br>
                             <a href="${option.recipe.url}" 
                             target="_blank" id="full-Recipe">Full Recipe</a>
                             <br><br>
-                            <h4>${option.recipe.dietLabels}<h4>
+                            <h4 style="color:brown";>${option.recipe.dietLabels}<h4>
                             
-                            <a href="##"><h4>Ingredeants:</h4></a>
-                        <ul class="ingredient">
+                            <a href="##"><h4 style="color:darkorange";>Ingredeants:</h4></a>
+                        <ul class="ingredient" style="color:olivedrab";>
                         ${option.recipe.ingredientLines.join('.<br>')}
                         </ul>
                             </section><br>`;
