@@ -27,21 +27,21 @@ async function fetchData() {
         console.log(data["hits"]);
 
 
-        for (let hit of data["hits"]) {
+        for (let option of data["hits"]) {
 
 
-            htmlContent += `<a href="${hit.recipe.url}" 
+            htmlContent += `<a href="${option.recipe.url}" 
                             target="_blank">Full Recipe</a>`
             htmlContent += `<section class="result"> 
-                            <h3>${hit.recipe.label}</h3>
-                           <img src=${hit.recipe.image}>
+                            <h3>${option.recipe.label}</h3>
+                           <img src=${option.recipe.image}>
                            <br>
-                        <i>Source:${hit.recipe.source}</i>
+                        <i>Source:${option.recipe.source}</i>
                         <h4>healthLabels:</h4>
-                        <span>${hit.recipe.healthLabels}</span>;
+                        <span>${option.recipe.healthLabels}</span>;
                         <a href="##"><h4>Ingredeants:</h4></a>
                         <ul class="ingredient">
-                        ${hit.recipe.ingredientLines.join('.<br>')}
+                        ${option.recipe.ingredientLines.join('.<br>')}
                         </ul>
                         </section>
                         `
@@ -51,8 +51,15 @@ async function fetchData() {
 
 
         container.innerHTML = htmlContent;
+        toggleIngredients();
 
-        let ingredients = document.querySelectorAll("#container a");
+    } catch (error) {
+        throw new Error("Some thing went wrong");
+    }
+    htmlContent = "";
+}
+function toggleIngredients(){
+let ingredients = document.querySelectorAll("#container a");
         for (let ingredient of ingredients) {
             ingredient.addEventListener("click", function () {
 
@@ -60,12 +67,7 @@ async function fetchData() {
 
             });
         }
-
-    } catch (error) {
-        throw new Error("Some thing went wrong");
     }
-    htmlContent = "";
-}
 let dietValue = "";
 document.getElementById("choice").onchange = function () {
 
@@ -76,7 +78,6 @@ document.getElementById("choice").onchange = function () {
 async function fetchData2() {
     try {
 
-        let htmlContent2 = "";
         let response = await fetch(`https://api.edamam.com/search?app_id=${APPI_ID}&app_key=${APPI_KEY}&q=${input.value}&diet=${dietValue}`);
 
         let data = await response.json();
@@ -85,14 +86,19 @@ async function fetchData2() {
 
         for (let option of data.hits) {
 
-            htmlContent2 += `<section class="result"> 
+            htmlContent += `<section class="result"> 
                             <h3>${option.recipe.label}</h3>
                             <img src=${option.recipe.image}>
                             <h4>${option.recipe.dietLabels}<h4>
                             <p><a href="${option.recipe.url}">Recipe</a></p>
+                            <a href="##"><h4>Ingredeants:</h4></a>
+                        <ul class="ingredient">
+                        ${option.recipe.ingredientLines.join('.<br>')}
+                        </ul>
                             </section>`;
         }
-        container.innerHTML = htmlContent2;
+        container.innerHTML = htmlContent;
+        toggleIngredients();
     } catch (error) {
         throw new Error("Some thing went wrong");
     }
@@ -104,7 +110,7 @@ multiCkeck.addEventListener("click", fetchData3);
 
 let chekedValue = " ";
 
-async function fetchData3(input2) {
+async function fetchData3() {
 
     try {
 
@@ -118,21 +124,25 @@ async function fetchData3(input2) {
             }
         }
 
-        let htmlContent3 = "";
         let response = await fetch(`https://api.edamam.com/search?app_id=${APPI_ID}&app_key=${APPI_KEY}&q=${input.value}&excluded=${chekedValue}`);
         let data = await response.json();
         console.log(data);
 
         for (let option of data.hits) {
 
-            htmlContent3 += `<section class="result"> 
+            htmlContent += `<section class="result"> 
                             <h3>${option.recipe.label}</h3>
                             <img src=${option.recipe.image}>
                             <h4>${option.recipe.dietLabels}<h4>
                             <p><a href="${option.recipe.url}">Recipe</a></p>
+                            <a href="##"><h4>Ingredeants:</h4></a>
+                        <ul class="ingredient">
+                        ${option.recipe.ingredientLines.join('.<br>')}
+                        </ul>
                             </section>`;
         }
-        container.innerHTML = htmlContent3;
+        container.innerHTML = htmlContent;
+        toggleIngredients();
     } catch (error) {
         throw new Error("Some thing went wrong");
     }
