@@ -1,17 +1,15 @@
 
 //selectors
-//let searchBtn = document.getElementById("search");
+let searchBtn = document.getElementById("search");
 let input = document.getElementById("input");
 let container = document.getElementById("container");
 let APPI_ID = "ec4b29b4";
 let APPI_KEY = "b9da11433e30787ee73b10e573acbf23";
+searchBtn.addEventListener("click", fetchData);
 let htmlContent = "";
-let dietValue="";
-let inputValue ="";
 
 //Events
-//searchBtn.addEventListener("click", fetchData);
-input.addEventListener("keyup",autoComplete);
+searchBtn.addEventListener("click", fetchData);
 document.getElementById("choice").onchange=getOptionValue;
 
 //helper functions
@@ -20,30 +18,16 @@ function getOptionValue(){
     dietValue= this.value;
     fetchData2();
 };
-function autoComplete(){
-     inputValue = this.value;
-    if(inputValue.trim()!=""){
-
-        fetchData();
-    }else{
-        
-        alert("Please Enter a recipe name");
-        
-    }
-    
-};
-
 
 //First fetch
 async function fetchData() {
-    
+
     try {
-        
-        let response = await fetch(`https://api.edamam.com/search?app_id=${APPI_ID}&app_key=${APPI_KEY}&q=${inputValue}`);
+        let response = await fetch(`https://api.edamam.com/search?app_id=${APPI_ID}&app_key=${APPI_KEY}&q=${input.value}`);
         let data = await response.json();
         console.log(data["hits"]);
 
-           
+
         for (let hit of data["hits"]) {
 
 
@@ -73,13 +57,18 @@ async function fetchData() {
     }
     htmlContent = "";
 }
-
+let dietValue="";
+document.getElementById("choice").onchange=function(){
+    
+    dietValue= this.value;
+    fetchData2();
+};
 
 async function fetchData2() {
     try {
         
-        let htmlContent = "";
-        let response = await fetch(`https://api.edamam.com/search?app_id=${APPI_ID}&app_key=${APPI_KEY}&q=${inputValue}&diet=${dietValue}`);
+        let htmlContent2 = "";
+        let response = await fetch(`https://api.edamam.com/search?app_id=${APPI_ID}&app_key=${APPI_KEY}&q=${input.value}&diet=${dietValue}&excluded=${chekedValue}`);
 
         let data = await response.json();
         console.log(data);
@@ -87,14 +76,14 @@ async function fetchData2() {
 
         for (let option of data.hits) {
 
-            htmlContent += `<section class="result"> 
+            htmlContent2 += `<section class="result"> 
                             <h3>${option.recipe.label}</h3>
                             <img src=${option.recipe.image}>
                             <h4>${option.recipe.dietLabels}<h4>
                             <p><a href="${option.recipe.url}">Recipe</a></p>
                             </section>`;
         }
-        container.innerHTML = htmlContent;
+        container.innerHTML = htmlContent2;
     } catch (error) {
         throw new Error("Some thing went wrong");
     }
@@ -106,7 +95,7 @@ multiCkeck.addEventListener("click",fetchData3);
 
 let chekedValue =" ";
 
-async function fetchData3() {
+async function fetchData3(input2) {
 
     try {
 
@@ -120,21 +109,21 @@ async function fetchData3() {
             }
         }
         
-        let htmlContent = "";
-        let response = await fetch(`https://api.edamam.com/search?app_id=${APPI_ID}&app_key=${APPI_KEY}&q=${inputValue}&excluded=${chekedValue}`);
+        let htmlContent3 = "";
+        let response = await fetch(`https://api.edamam.com/search?app_id=${APPI_ID}&app_key=${APPI_KEY}&q=${input.value}&diet=${dietValue}&excluded=${chekedValue}`);
         let data = await response.json();
         console.log(data);
         
         for (let option of data.hits) {
 
-            htmlContent += `<section class="result"> 
+            htmlContent3 += `<section class="result"> 
                             <h3>${option.recipe.label}</h3>
                             <img src=${option.recipe.image}>
                             <h4>${option.recipe.dietLabels}<h4>
                             <p><a href="${option.recipe.url}">Recipe</a></p>
                             </section>`;
         }
-        container.innerHTML = htmlContent;
+        container.innerHTML = htmlContent3;
     } catch (error) {
         throw new Error("Some thing went wrong");
     }
