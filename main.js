@@ -1,17 +1,18 @@
 
 //selectors
-let searchBtn = document.getElementById("search");
+//let searchBtn = document.getElementById("search");
 let input = document.getElementById("input");
 let container = document.getElementById("container");
 let APPI_ID = "ec4b29b4";
 let APPI_KEY = "b9da11433e30787ee73b10e573acbf23";
 let htmlContent = "";
 let dietValue="";
+let inputValue ="";
 
 //Events
-searchBtn.addEventListener("click", fetchData);
-document.getElementById("choice").onchange=getOptionValue;
+//searchBtn.addEventListener("click", fetchData);
 input.addEventListener("keyup",autoComplete);
+document.getElementById("choice").onchange=getOptionValue;
 
 //helper functions
 function getOptionValue(){
@@ -20,7 +21,7 @@ function getOptionValue(){
     fetchData2();
 };
 function autoComplete(){
-    let inputValue = this.value;
+     inputValue = this.value;
     if(inputValue.trim()!=""){
 
         fetchData();
@@ -38,7 +39,7 @@ async function fetchData() {
     
     try {
         
-        let response = await fetch(`https://api.edamam.com/search?app_id=${APPI_ID}&app_key=${APPI_KEY}&q=${input.value}`);
+        let response = await fetch(`https://api.edamam.com/search?app_id=${APPI_ID}&app_key=${APPI_KEY}&q=${inputValue}`);
         let data = await response.json();
         console.log(data["hits"]);
 
@@ -78,7 +79,7 @@ async function fetchData2() {
     try {
         
         let htmlContent = "";
-        let response = await fetch(`https://api.edamam.com/search?app_id=${APPI_ID}&app_key=${APPI_KEY}&q=${input.value}&diet=${dietValue}`);
+        let response = await fetch(`https://api.edamam.com/search?app_id=${APPI_ID}&app_key=${APPI_KEY}&q=${inputValue}&diet=${dietValue}`);
 
         let data = await response.json();
         console.log(data);
@@ -120,7 +121,7 @@ async function fetchData3() {
         }
         
         let htmlContent = "";
-        let response = await fetch(`https://api.edamam.com/search?app_id=${APPI_ID}&app_key=${APPI_KEY}&q=${input.value}&excluded=${chekedValue}`);
+        let response = await fetch(`https://api.edamam.com/search?app_id=${APPI_ID}&app_key=${APPI_KEY}&q=${inputValue}&excluded=${chekedValue}`);
         let data = await response.json();
         console.log(data);
         
