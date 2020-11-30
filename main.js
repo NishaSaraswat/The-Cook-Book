@@ -68,7 +68,7 @@ async function fetchData2() {
     try {
         
         let htmlContent2 = "";
-        let response = await fetch(`https://api.edamam.com/search?app_id=${APPI_ID}&app_key=${APPI_KEY}&q=${input.value}&diet=${dietValue}&excluded=${chekedValue}`);
+        let response = await fetch(`https://api.edamam.com/search?app_id=${APPI_ID}&app_key=${APPI_KEY}&q=${input.value}&diet=${dietValue}`);
 
         let data = await response.json();
         console.log(data);
@@ -110,7 +110,7 @@ async function fetchData3(input2) {
         }
         
         let htmlContent3 = "";
-        let response = await fetch(`https://api.edamam.com/search?app_id=${APPI_ID}&app_key=${APPI_KEY}&q=${input.value}&diet=${dietValue}&excluded=${chekedValue}`);
+        let response = await fetch(`https://api.edamam.com/search?app_id=${APPI_ID}&app_key=${APPI_KEY}&q=${input.value}&excluded=${chekedValue}`);
         let data = await response.json();
         console.log(data);
         
