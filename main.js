@@ -1,4 +1,3 @@
-
 //selectors
 let searchBtn = document.getElementById("search");
 let input = document.getElementById("input");
@@ -10,12 +9,12 @@ let htmlContent = "";
 
 //Events
 searchBtn.addEventListener("click", fetchData);
-document.getElementById("choice").onchange=getOptionValue;
+document.getElementById("choice").onchange = getOptionValue;
 
 //helper functions
-function getOptionValue(){
-    
-    dietValue= this.value;
+function getOptionValue() {
+
+    dietValue = this.value;
     fetchData2();
 };
 
@@ -31,42 +30,52 @@ async function fetchData() {
         for (let hit of data["hits"]) {
 
 
-            htmlContent += `
-                            <section class="result"> 
+            htmlContent += `<a href="${hit.recipe.url}" 
+                            target="_blank">Full Recipe</a>`
+            htmlContent += `<section class="result"> 
                             <h3>${hit.recipe.label}</h3>
                            <img src=${hit.recipe.image}>
                            <br>
                         <i>Source:${hit.recipe.source}</i>
-                        <p><a href="${hit.recipe.url}">Recipe</a></p>
                         <h4>healthLabels:</h4>
                         <span>${hit.recipe.healthLabels}</span>;
-                        <h4>Ingredeants:</h4>
-                        <ul>
+                        <a href="##"><h4>Ingredeants:</h4></a>
+                        <ul class="ingredient">
                         ${hit.recipe.ingredientLines.join('.<br>')}
                         </ul>
                         </section>
                         `
+           
 
         }
 
 
         container.innerHTML = htmlContent;
 
+        let ingredients = document.querySelectorAll("#container a");
+        for (let ingredient of ingredients) {
+            ingredient.addEventListener("click", function () {
+
+                this.parentNode.lastElementChild.classList.toggle("ingredient");
+
+            });
+        }
+
     } catch (error) {
         throw new Error("Some thing went wrong");
     }
     htmlContent = "";
 }
-let dietValue="";
-document.getElementById("choice").onchange=function(){
-    
-    dietValue= this.value;
+let dietValue = "";
+document.getElementById("choice").onchange = function () {
+
+    dietValue = this.value;
     fetchData2();
 };
 
 async function fetchData2() {
     try {
-        
+
         let htmlContent2 = "";
         let response = await fetch(`https://api.edamam.com/search?app_id=${APPI_ID}&app_key=${APPI_KEY}&q=${input.value}&diet=${dietValue}`);
 
@@ -91,9 +100,9 @@ async function fetchData2() {
 }
 
 let multiCkeck = document.getElementById("submit");
-multiCkeck.addEventListener("click",fetchData3);
+multiCkeck.addEventListener("click", fetchData3);
 
-let chekedValue =" ";
+let chekedValue = " ";
 
 async function fetchData3(input2) {
 
@@ -105,15 +114,15 @@ async function fetchData3(input2) {
             if (checkBox.checked) {
                 chekedValue = checkBox.value;
                 console.log(chekedValue);
-                
+
             }
         }
-        
+
         let htmlContent3 = "";
         let response = await fetch(`https://api.edamam.com/search?app_id=${APPI_ID}&app_key=${APPI_KEY}&q=${input.value}&excluded=${chekedValue}`);
         let data = await response.json();
         console.log(data);
-        
+
         for (let option of data.hits) {
 
             htmlContent3 += `<section class="result"> 
