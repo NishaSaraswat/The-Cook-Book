@@ -29,23 +29,23 @@ async function fetchData() {
 
         for (let option of data["hits"]) {
 
-
-            htmlContent += `<a href="${option.recipe.url}" 
-                            target="_blank">Full Recipe</a>`
             htmlContent += `<section class="result"> 
-                            <h3>${option.recipe.label}</h3>
+                            <h3 style="color:purple";>${option.recipe.label}</h3>
                            <img src=${option.recipe.image}>
-                           <br>
-                        <i>Source:${option.recipe.source}</i>
-                        <h4>healthLabels:</h4>
-                        <span>${option.recipe.healthLabels}</span>;
-                        <a href="##"><h4>Ingredeants:</h4></a>
-                        <ul class="ingredient">
+                           <br><br>
+                           <a href="${option.recipe.url}" 
+                           target="_blank" id="full-Recipe">Full Recipe</a>
+                           <br><br>
+                        <i style="color:darkgreen";>Source:${option.recipe.source}</i>
+                        <h4 style="color:brown";>healthLabels:</h4>
+                        <span style="color:darkgray">${option.recipe.healthLabels}</span>;
+                        <a href="##"><h4 style="color:darkorange";>Ingredeants:</h4></a>
+                        <ul class="ingredient" style="color:olivedrab";>
                         ${option.recipe.ingredientLines.join('.<br>')}
                         </ul>
-                        </section>
-                        `
-           
+                        </section><br> `
+
+
 
         }
 
@@ -58,16 +58,17 @@ async function fetchData() {
     }
     htmlContent = "";
 }
-function toggleIngredients(){
-let ingredients = document.querySelectorAll("#container a");
-        for (let ingredient of ingredients) {
-            ingredient.addEventListener("click", function () {
 
-                this.parentNode.lastElementChild.classList.toggle("ingredient");
+function toggleIngredients() {
+    let ingredients = document.querySelectorAll("#container a");
+    for (let ingredient of ingredients) {
+        ingredient.addEventListener("click", function () {
 
-            });
-        }
+            this.parentNode.lastElementChild.classList.toggle("ingredient");
+
+        });
     }
+}
 let dietValue = "";
 document.getElementById("choice").onchange = function () {
 
@@ -89,13 +90,17 @@ async function fetchData2() {
             htmlContent += `<section class="result"> 
                             <h3>${option.recipe.label}</h3>
                             <img src=${option.recipe.image}>
+                            <br><br>
+                            <a href="${option.recipe.url}" 
+                            target="_blank" id="full-Recipe">Full Recipe</a>
+                            <br><br>
                             <h4>${option.recipe.dietLabels}<h4>
-                            <p><a href="${option.recipe.url}">Recipe</a></p>
                             <a href="##"><h4>Ingredeants:</h4></a>
                         <ul class="ingredient">
                         ${option.recipe.ingredientLines.join('.<br>')}
                         </ul>
-                            </section>`;
+                            </section><br>`;
+
         }
         container.innerHTML = htmlContent;
         toggleIngredients();
@@ -133,13 +138,18 @@ async function fetchData3() {
             htmlContent += `<section class="result"> 
                             <h3>${option.recipe.label}</h3>
                             <img src=${option.recipe.image}>
+                            <br><br>
+                            <a href="${option.recipe.url}" 
+                            target="_blank" id="full-Recipe">Full Recipe</a>
+                            <br><br>
                             <h4>${option.recipe.dietLabels}<h4>
-                            <p><a href="${option.recipe.url}">Recipe</a></p>
+                            
                             <a href="##"><h4>Ingredeants:</h4></a>
                         <ul class="ingredient">
                         ${option.recipe.ingredientLines.join('.<br>')}
                         </ul>
-                            </section>`;
+                            </section><br>`;
+
         }
         container.innerHTML = htmlContent;
         toggleIngredients();
