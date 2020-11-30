@@ -102,7 +102,7 @@ async function fetchData2() {
     } catch (error) {
         throw new Error("Some thing went wrong");
     }
-
+    htmlContent = "";
 }
 
 let multiCkeck = document.getElementById("submit");
@@ -146,7 +146,7 @@ async function fetchData3() {
     } catch (error) {
         throw new Error("Some thing went wrong");
     }
-
+    htmlContent = "";
 }
 /*let more = document.getElementById("more");
 more.addEventListener("click",function(){
