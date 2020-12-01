@@ -112,7 +112,7 @@ text-align: center;
     border-radius: 5px;
     border-style: hidden;
    }
-   @media only screen and (max-width: 600px) 
+   @media only screen and (min-width: 230px) and (max-width: 730px) 
   {
    #input {
         
