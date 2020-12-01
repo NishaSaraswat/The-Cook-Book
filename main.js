@@ -56,15 +56,16 @@ async function fetchData() {
         for (let option of data["hits"]) {
 
             htmlContent += `<section class="result"> 
-                            <h3 style="color:purple";>${option.recipe.label}</h3>
+                            <h3 style="color:cornsilk";>${option.recipe.label}</h3>
                            <img src=${option.recipe.image}>
                            <br><br>
                           <button><a href="${option.recipe.url}" 
                            target="_blank" id="full-Recipe">Full Recipe</a></button>
                            <br><br>
-                        <i style="color:darkgreen";>Source:${option.recipe.source}</i>
+                        <i style="color:floralwhite";>Source:${option.recipe.source}</i>
                         <h4 style="color:brown";>healthLabels:</h4>
-                        <span style="color:darkgray">${option.recipe.healthLabels}</span>;
+                        <p style="color:darkgray">${option.recipe.healthLabels}</p>
+                        <br><br><br>
                         <a href="##"><h4 style="color:darkorange";>Ingredeants:</h4></a>
                         <ul class="ingredient" style="color:olivedrab";>
                         ${option.recipe.ingredientLines.join('.<br>')}
@@ -114,13 +115,14 @@ async function fetchData2() {
         for (let option of data.hits) {
 
             htmlContent += `<section class="result"> 
-                            <h3 style="color:purple";>${option.recipe.label}</h3>
+                            <h3 style="color:cornsilk";>${option.recipe.label}</h3>
                             <img src=${option.recipe.image}>
                             <br><br>
                            <button><a href="${option.recipe.url}" 
                             target="_blank" id="full-Recipe">Full Recipe</a></button>
                             <br><br>
-                            <h4 style="color:brown";>${option.recipe.dietLabels}<h4>
+                            <h4 style="color:floralwhite";>${option.recipe.dietLabels}</h4>
+                            <br>
                             <a href="##"><h4 style="color:darkorange";>Ingredeants:</h4></a>
                         <ul class="ingredient" style="color:olivedrab";>
                         ${option.recipe.ingredientLines.join('.<br>')}
@@ -162,14 +164,14 @@ async function fetchData3() {
         for (let option of data.hits) {
 
             htmlContent += `<section class="result"> 
-                            <h3 style="color:purple";>${option.recipe.label}</h3>
+                            <h3 style="color:cornsilk";>${option.recipe.label}</h3>
                             <img src=${option.recipe.image}>
                             <br><br>
                             <button><a href="${option.recipe.url}" 
                             target="_blank" id="full-Recipe">Full Recipe</a></button>
                             <br><br>
-                            <h4 style="color:brown";>${option.recipe.dietLabels}<h4>
-                            
+                            <h4 style="color:floralwhite";>${option.recipe.dietLabels}</h4>
+                            <br>
                             <a href="##"><h4 style="color:darkorange";>Ingredeants:</h4></a>
                         <ul class="ingredient" style="color:olivedrab";>
                         ${option.recipe.ingredientLines.join('.<br>')}
