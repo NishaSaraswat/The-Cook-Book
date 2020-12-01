@@ -2,15 +2,15 @@
 body{
     padding: 0;
     margin: 0;
-    background-color: honeydew;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: rgb(41, 39, 39);
+    font-family: Arial, Helvetica, sans-serif;
     box-sizing: border-box;
     color: royalblue;
     text-align: center;
+    
 }
 h1{
-    color: blueviolet;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(191, 153, 226);
     text-align: center;
 }
 #container{
@@ -19,6 +19,7 @@ h1{
     display:flex;
     flex-flow:row wrap;
     text-align: center;
+    
 }
 .result{
 
@@ -26,6 +27,8 @@ h1{
    margin-top: 20px;
   line-height: 15px;
   text-align: center;
+  box-sizing: border-box;
+  
 }
 #container img{
 border-radius: 10px;  
@@ -46,24 +49,26 @@ text-align: center;
     #input{
 
         line-height: 25px;
+        padding: 4px;   
     }
     button{
+        text-decoration: none;
+        border: none;
        line-height: 25px;
-       background-color: lightblue;
-       color: rgb(17, 4, 90);
+       background-color: rgb(42, 85, 7);
+       color: rgb(157, 204, 29);
        border-radius: 5px;
    }
    #section3,#section2,#section1 {
     padding-top: 25px;
-    padding-right: 40px;
+    padding-right: 60px;
     line-height: 25px;
     
    }
    .main{
     display:flex;
     justify-content: center;
-    
-    
+    padding-top: 150px;
    }
    .ingredient{
 
@@ -71,5 +76,38 @@ text-align: center;
    }
    a{
     text-decoration: none;
+    color:rgb(157, 204, 29);
    }
-   
+   label{
+    color:palegreen;
+    
+   }
+   a h4{
+       display: inline;
+       background-color: lightgoldenrodyellow;
+       border-radius: 2px;
+       padding:5px;
+    
+   }
+   p{
+       font-size: smaller;
+   }
+   #choice{
+
+    padding:8px;
+   }
+   ion-icon{
+
+    height: 20px;
+    position: absolute;
+    zoom: 150%;
+   }
+   #submit{
+
+    background-color:rgb(42, 85, 7) ;
+    color: mediumseagreen;
+    margin-left: 30px;
+    line-height:20px;
+    border-radius: 5px;
+    border-style: hidden;
+   }
