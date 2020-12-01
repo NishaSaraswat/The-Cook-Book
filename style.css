@@ -12,6 +12,7 @@ body{
 h1{
     color: rgb(191, 153, 226);
     text-align: center;
+    padding-top: 120px;
 }
 #container{
     height:auto;
@@ -68,7 +69,7 @@ text-align: center;
    .main{
     display:flex;
     justify-content: center;
-    padding-top: 150px;
+    padding-top: 50px;
    }
    .ingredient{
 
@@ -111,3 +112,47 @@ text-align: center;
     border-radius: 5px;
     border-style: hidden;
    }
+   @media only screen and (max-width: 600px) 
+  {
+   #input {
+        
+    line-height: 30px;
+    border-radius: 10px;
+       }
+       
+       ion-icon{
+
+        height: 25px;
+        zoom: 170%;
+       }
+       #choice{
+        padding:8px;
+        border-radius: 10px;
+        margin-left: 10px;
+       }
+       #submit{
+        line-height:30px;
+        margin-top:12px;
+       }
+       #vegan,#vegetarian{
+
+        width:18px;
+        height:18px;
+        margin-top: 20PX;
+       }
+        label{
+           font-size: 16px;
+       }
+       .main{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+       }
+       #section3,#section2,#section1 {
+        
+        padding-right: 20px;
+        padding-left: 15px;
+        
+       }
+
+}
