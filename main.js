@@ -45,7 +45,7 @@ let baseURL = `https://api.edamam.com/search?`;
 
 //Events
 searchBtn.addEventListener("click",fetchData);
-searchform.addEventListener("keyup",(e)=>{
+searchform.addEventListener("submit",(e)=>{
     e.preventDefault();
     searchQuery = e.target.querySelector('input').value;
     fetchData();
