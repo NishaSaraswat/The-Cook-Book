@@ -26,57 +26,42 @@
 
 //selectors
 let searchBtn = document.getElementById("search");
+let searchform = document.querySelector("form");
 let input = document.getElementById("input");
 let container = document.getElementById("container");
+let multiCkeck = document.getElementById("submit");
+let checkBoxes = document.getElementsByName("health");
+let defaultDietValue = document.getElementById("default");
+let htmlContent = "";
+let dietValue = "";
+let chekedValue = " ";
+let searchQuery = " ";
+let hitsData ="";
+//Edamam sellectors
 let APPI_ID = "ec4b29b4";
 let APPI_KEY = "b9da11433e30787ee73b10e573acbf23";
-searchBtn.addEventListener("click", fetchData);
-let htmlContent = "";
+let baseURL = `https://api.edamam.com/search?`;
+
 
 //Events
-searchBtn.addEventListener("click", fetchData);
+searchBtn.addEventListener("click",fetchData);
+searchform.addEventListener("keyup",(e)=>{
+    e.preventDefault();
+    searchQuery = e.target.querySelector('input').value;
+    fetchData();
+});
 document.getElementById("choice").onchange = getOptionValue;
+multiCkeck.addEventListener("click", fetchData3);
 
-//helper functions
-function getOptionValue() {
-
-    dietValue = this.value;
-    fetchData2();
-};
 
 //First fetch
 async function fetchData() {
 
     try {
-        let response = await fetch(`https://api.edamam.com/search?app_id=${APPI_ID}&app_key=${APPI_KEY}&q=${input.value}`);
+        let response = await fetch(`${baseURL}&q=${input.value}&to=20&app_id=${APPI_ID}&app_key=${APPI_KEY}`);
         let data = await response.json();
-        console.log(data["hits"]);
-
-
-        for (let option of data["hits"]) {
-
-            htmlContent += `<section class="result"> 
-                            <h3 style="color:cornsilk";>${option.recipe.label}</h3>
-                           <img src=${option.recipe.image}>
-                           <br><br>
-                          <button><a href="${option.recipe.url}" 
-                           target="_blank" id="full-Recipe">Full Recipe</a></button>
-                           <br><br>
-                        <i style="color:floralwhite";>Source:${option.recipe.source}</i>
-                        <h4 style="color:brown";>healthLabels:</h4>
-                        <p style="color:darkgray">${option.recipe.healthLabels}</p>
-                        <br><br><br>
-                        <a href="##"><h4 style="color:darkorange";>Ingredeants:</h4></a>
-                        <ul class="ingredient" style="color:olivedrab";>
-                        ${option.recipe.ingredientLines.join('.<br>')}
-                        </ul>
-                        </section><br> `
-
-
-
-        }
-
-
+         hitsData= (data.hits);
+        htmlGeneratorfetch(hitsData);
         container.innerHTML = htmlContent;
         toggleIngredients();
 
@@ -85,6 +70,51 @@ async function fetchData() {
     }
     htmlContent = "";
 }
+
+//Second fetch
+async function fetchData2() {
+    try {
+
+        let response = await fetch(`${baseURL}&q=${input.value}&to=20&diet=${dietValue}&app_id=${APPI_ID}&app_key=${APPI_KEY}`);
+
+        let data = await response.json();
+        hitsData = data.hits;
+        htmlGeneratorfetch(hitsData);
+        container.innerHTML = htmlContent;
+        toggleIngredients();
+    } catch (error) {
+        throw new Error("Some thing went wrong");
+    }
+    htmlContent = "";
+}
+
+//Third fetch
+async function fetchData3() {
+
+    try {
+
+        checkBox();
+        let response = await fetch(`${baseURL}&q=${input.value}&to=20&health=${chekedValue}&app_id=${APPI_ID}&app_key=${APPI_KEY}`);
+        let data = await response.json();
+
+        hitsData = data.hits;
+
+        htmlGeneratorfetch(hitsData);
+        container.innerHTML = htmlContent;
+        toggleIngredients();
+    } catch (error) {
+        throw new Error("Some thing went wrong");
+    }
+    htmlContent = "";
+}
+
+//Helper functions
+
+function getOptionValue() {
+
+    dietValue = this.value;
+    fetchData2();
+};
 
 function toggleIngredients() {
     let ingredients = document.querySelectorAll("#container a");
@@ -96,97 +126,37 @@ function toggleIngredients() {
         });
     }
 }
-let dietValue = "";
-document.getElementById("choice").onchange = function () {
 
-    dietValue = this.value;
-    fetchData2();
-};
-//Second fetch
-async function fetchData2() {
-    try {
+function checkBox() {
+    for (let checkBox of checkBoxes) {
 
-        let response = await fetch(`https://api.edamam.com/search?app_id=${APPI_ID}&app_key=${APPI_KEY}&q=${input.value}&diet=${dietValue}`);
-
-        let data = await response.json();
-        console.log(data);
-
-
-        for (let option of data.hits) {
-
-            htmlContent += `<section class="result"> 
-                            <h3 style="color:cornsilk";>${option.recipe.label}</h3>
-                            <img src=${option.recipe.image}>
-                            <br><br>
-                           <button><a href="${option.recipe.url}" 
-                            target="_blank" id="full-Recipe">Full Recipe</a></button>
-                            <br><br>
-                            <h4 style="color:floralwhite";>${option.recipe.dietLabels}</h4>
-                            <br>
-                            <a href="##"><h4 style="color:darkorange";>Ingredeants:</h4></a>
-                        <ul class="ingredient" style="color:olivedrab";>
-                        ${option.recipe.ingredientLines.join('.<br>')}
-                        </ul>
-                            </section><br>`;
+        if (checkBox.checked) {
+            chekedValue = checkBox.value;
 
         }
-        container.innerHTML = htmlContent;
-        toggleIngredients();
-    } catch (error) {
-        throw new Error("Some thing went wrong");
     }
-    htmlContent = "";
 }
 
-let multiCkeck = document.getElementById("submit");
-multiCkeck.addEventListener("click", fetchData3);
+function htmlGeneratorfetch(hitsData) {
+    for (let option of hitsData) {
 
-let chekedValue = " ";
-//Third fetch
-async function fetchData3() {
-
-    try {
-
-        let checkBoxes = document.getElementsByName("health");
-        for (let checkBox of checkBoxes) {
-
-            if (checkBox.checked) {
-                chekedValue = checkBox.value;
-                console.log(chekedValue);
-
-            }
-        }
-
-        let response = await fetch(`https://api.edamam.com/search?app_id=${APPI_ID}&app_key=${APPI_KEY}&q=${input.value}&health=${chekedValue}`);
-        let data = await response.json();
-        console.log(data);
-
-        for (let option of data.hits) {
-
-            htmlContent += `<section class="result"> 
-                            <h3 style="color:cornsilk";>${option.recipe.label}</h3>
-                            <img src=${option.recipe.image}>
-                            <br><br>
-                            <button><a href="${option.recipe.url}" 
-                            target="_blank" id="full-Recipe">Full Recipe</a></button>
-                            <br><br>
-                            <h4 style="color:floralwhite";>${option.recipe.dietLabels}</h4>
-                            <br>
-                            <a href="##"><h4 style="color:darkorange";>Ingredeants:</h4></a>
-                        <ul class="ingredient" style="color:olivedrab";>
-                        ${option.recipe.ingredientLines.join('.<br>')}
-                        </ul>
-                            </section><br>`;
-
-        }
-        container.innerHTML = htmlContent;
-        toggleIngredients();
-    } catch (error) {
-        throw new Error("Some thing went wrong");
+        htmlContent += `<section class="result"> 
+                        <h3 style="color:cornsilk";>${option.recipe.label}</h3>
+                       <img src=${option.recipe.image}>
+                       <br><br>
+                      <button><a href="${option.recipe.url}" 
+                       target="_blank" id="full-Recipe">Full Recipe</a></button>
+                       <br><br>
+                    <i style="color:floralwhite";>Source:${option.recipe.source}</i>
+                    <h4 style="color:brown";>healthLabels:</h4>
+                    <p style="color:darkgray">${option.recipe.healthLabels}</p>
+                    <br><br><br>
+                    <a href="##"><h4 style="color:darkorange";>Ingredeants:</h4></a>
+                    <ul class="ingredient" style="color:olivedrab";>
+                    ${option.recipe.ingredientLines.join('.<br>')}
+                    </ul>
+                    </section><br> `
     }
-    htmlContent = "";
-}
-/*let more = document.getElementById("more");
-more.addEventListener("click",function(){
 
-});*/
+}
+
