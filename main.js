@@ -6,22 +6,22 @@
 
 
 /**
-* According to documentation, you need these parameters when calling the API https://api.edamam.com/
-* 1 Required parameter: APIkey
-* 1 Required parameter: APIid
-* 1 Required parameter: q.
-*
-* 
-* Example with parameter q=pasta
-* https://api.edamam.com/search?apikey=[yourkey]&q=pasta
-*
-* Example with parameter q=pasta AND diet=low-carb
-* http://www.omdbapi.com/?apikey=[yourkey]&q=pasta&diet=low-carb
-*
-* Example with parameter q=pasta AND health=vegan
-* http://www.omdbapi.com/?apikey=[yourkey]&q=pasta&health=vegan
-*
-*/
+ * According to documentation, you need these parameters when calling the API https://api.edamam.com/
+ * 1 Required parameter: APIkey
+ * 1 Required parameter: APIid
+ * 1 Required parameter: q.
+ *
+ * 
+ * Example with parameter q=pasta
+ * https://api.edamam.com/search?apikey=[yourkey]&q=pasta
+ *
+ * Example with parameter q=pasta AND diet=low-carb
+ * http://www.omdbapi.com/?apikey=[yourkey]&q=pasta&diet=low-carb
+ *
+ * Example with parameter q=pasta AND health=vegan
+ * http://www.omdbapi.com/?apikey=[yourkey]&q=pasta&health=vegan
+ *
+ */
 
 
 //selectors
@@ -59,8 +59,8 @@ async function fetchData() {
                             <h3 style="color:purple";>${option.recipe.label}</h3>
                            <img src=${option.recipe.image}>
                            <br><br>
-                           <a href="${option.recipe.url}" 
-                           target="_blank" id="full-Recipe">Full Recipe</a>
+                          <button><a href="${option.recipe.url}" 
+                           target="_blank" id="full-Recipe">Full Recipe</a></button>
                            <br><br>
                         <i style="color:darkgreen";>Source:${option.recipe.source}</i>
                         <h4 style="color:brown";>healthLabels:</h4>
@@ -117,8 +117,8 @@ async function fetchData2() {
                             <h3 style="color:purple";>${option.recipe.label}</h3>
                             <img src=${option.recipe.image}>
                             <br><br>
-                            <a href="${option.recipe.url}" 
-                            target="_blank" id="full-Recipe">Full Recipe</a>
+                           <button><a href="${option.recipe.url}" 
+                            target="_blank" id="full-Recipe">Full Recipe</a></button>
                             <br><br>
                             <h4 style="color:brown";>${option.recipe.dietLabels}<h4>
                             <a href="##"><h4 style="color:darkorange";>Ingredeants:</h4></a>
@@ -165,8 +165,8 @@ async function fetchData3() {
                             <h3 style="color:purple";>${option.recipe.label}</h3>
                             <img src=${option.recipe.image}>
                             <br><br>
-                            <a href="${option.recipe.url}" 
-                            target="_blank" id="full-Recipe">Full Recipe</a>
+                            <button><a href="${option.recipe.url}" 
+                            target="_blank" id="full-Recipe">Full Recipe</a></button>
                             <br><br>
                             <h4 style="color:brown";>${option.recipe.dietLabels}<h4>
                             
