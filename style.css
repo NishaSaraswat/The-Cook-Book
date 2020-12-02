@@ -16,7 +16,6 @@ h1{
 }
 #container{
     height:auto;
-    width: 100%;
     display:flex;
     flex-flow:row wrap;
     text-align: center;
@@ -33,10 +32,8 @@ h1{
 }
 #container img{
 border-radius: 10px;  
-margin-right: 40px;
-margin-left:60px;
 text-align: center;
-    
+margin-left: 25px;
 }
 
     .search{
@@ -92,6 +89,7 @@ text-align: center;
    }
    p{
        font-size: smaller;
+       padding: 10%;
    }
    #choice{
 
@@ -128,17 +126,18 @@ text-align: center;
        #choice{
         padding:8px;
         border-radius: 10px;
-        margin-left: 10px;
+        
        }
        #submit{
         line-height:30px;
         margin-top:12px;
+        margin-right: 10px;
        }
        #vegan,#vegetarian{
 
-        width:18px;
-        height:18px;
-        margin-top: 20PX;
+        width:16px;
+        height:16px;
+        margin-top: 10PX;
        }
         label{
            font-size: 16px;
@@ -156,62 +155,53 @@ text-align: center;
        }
        #container{
         
-        display:flex;
-        flex-flow: row wrap;
-        text-align: center;
-        padding-right: 120px;
+        margin-right: 25px;
+        
 
 }
   }
    @media only screen and (min-width: 720px) and (max-width: 930px)
   {
-   #input {
+    #input {
         
-    line-height: 30px;
-    border-radius: 10px;
-       }
-       
-       ion-icon{
-
-        height: 25px;
-        zoom: 170%;
-       }
-       #choice{
-        padding:8px;
+        line-height: 30px;
         border-radius: 10px;
-        margin-left: 10px;
-       }
-       #submit{
-        line-height:30px;
-        margin-top:12px;
-       }
-       #vegan,#vegetarian{
-
-        width:18px;
-        height:18px;
-        margin-top: 20PX;
-       }
-        label{
-           font-size: 16px;
-       }
-       .main{
-        display:flex;
-        flex-direction: column;
-        align-items: center;
-       }
-       #section3,#section2,#section1 {
-        
-        padding-right: 20px;
-        padding-left: 15px;
-        
-       }
-       #container{
-        
-        display:flex;
-        flex-flow: row wrap;
-        text-align: center;
-        
-
-
-}
+           }
+           
+           ion-icon{
+    
+            height: 25px;
+            zoom: 170%;
+           }
+           #choice{
+            padding:8px;
+            border-radius: 10px;
+            
+           }
+           #submit{
+            line-height:30px;
+            margin-top:12px;
+            margin-right: 10px;
+           }
+           #vegan,#vegetarian{
+    
+            width:16px;
+            height:16px;
+            margin-top: 10PX;
+           }
+            label{
+               font-size: 16px;
+           }
+           .main{
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+           }
+           #section3,#section2,#section1 {
+            
+            padding-right: 20px;
+            padding-left: 15px;
+            
+           }
+           
   }
