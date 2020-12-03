@@ -146,11 +146,11 @@ function htmlGeneratorfetch(hitsData) {
                        <br><br>
                       <button><a href="${option.recipe.url}" 
                        target="_blank" id="full-Recipe">Full Recipe</a></button>
-                       <br><br>
                     <i style="color:floralwhite";>Source:${option.recipe.source}</i>
+                    <h3 style="color:forestgreen">${option.recipe.dietLabels}</h3>
                     <h4 style="color:brown";>healthLabels:</h4>
-                    <p style="color:darkgray">${option.recipe.healthLabels}</p>
-                    <br><br><br>
+                    <p style="color:darkgray";>${option.recipe.healthLabels}</p>
+                    <br>
                     <a href="##"><h4 style="color:darkorange";>Ingredeants:</h4></a>
                     <ul class="ingredient" style="color:olivedrab";>
                     ${option.recipe.ingredientLines.join('.<br>')}
